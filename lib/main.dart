@@ -4,9 +4,15 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool change = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,14 +22,21 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Git test'),
         ),
-        body: const Center(
+        body: Center(
           child: Text(
-            'Hello you got my Git',
-            style: TextStyle(
+            change ? 'see the change' : 'Hello you got my Git',
+            style: const TextStyle(
               color: Colors.amber,
               fontSize: 100,
             ),
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              change = true;
+            });
+          },
         ),
       ),
     );
